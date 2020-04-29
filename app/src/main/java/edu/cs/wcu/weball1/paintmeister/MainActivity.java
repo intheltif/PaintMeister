@@ -13,7 +13,7 @@ import android.os.Handler;
  * @author Evert Ball
  * @author Chris Wolf
  *
- * @version 05/01/2020
+ * @version 05 May 2020
  *
  */
 public class MainActivity extends AppCompatActivity {
