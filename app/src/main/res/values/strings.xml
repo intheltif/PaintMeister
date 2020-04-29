@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Paint Meister</string>
+    <string name="main_menu_title">Let\'s Get Painting!</string>
+    <string name="paint_btn_text">Paint</string>
+    <string name="load_painting_btn_text">Load Painting</string>
+    <string name="preferences_btn">Preferences</string>
+    <string name="info_btn">About App</string>
 </resources>
