@@ -4,11 +4,15 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Path;
 import android.graphics.PointF;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.util.SparseArray;
 import android.view.MotionEvent;
 import android.view.View;
+
+import java.util.ArrayList;
 
 /**
  * A custom view to capture onClickEvents and draw paths where the user clicks on the screen.
@@ -17,94 +21,121 @@ import android.view.View;
  * @author Chris Wolf
  *
  */
-public class CustomView  extends View   {
+public class CustomView extends View implements View.OnTouchListener {
 
-    private static final int SIZE = 60;
-    private static final int DEFAULT_COLOR = Color.BLUE;
+    /** An array list of Path objects which make up the lines on the canvas **/
+    private ArrayList<Path> lines;
 
+    /** An array of active points to allow multiple lines to be drawn at the same time */
     private SparseArray<PointF> mActivePointers;
-    private Paint mPaint;
-    private int[] colors = { Color.BLUE, Color.GREEN, Color.MAGENTA,
-            Color.BLACK, Color.CYAN, Color.GRAY, Color.RED, Color.DKGRAY,
-            Color.LTGRAY, Color.YELLOW };
-    private Paint textPaint;
 
+    /**The path currently being drawn by the user**/
+    private Path activePath;
+
+    /**The pain that is currently used to draw**/
+    Paint mPaint;
+
+
+    /**
+     * Called when the custom view is initialized
+     * @param context
+     */
     public CustomView(Context context, AttributeSet attrs) {
-        super(context, attrs);
-        initView();
+        super(context,attrs);
+
+        this.setOnTouchListener(this);
+
+
+        mPaint = new Paint();
+        mPaint.setStyle(Paint.Style.STROKE);
+        mPaint.setStrokeWidth(6);
+        mPaint.setColor(Color.GREEN);
     }
 
-    private void initView() {
-        mActivePointers = new SparseArray<PointF>();
-        mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-        // set painter color to a color you like
-        mPaint.setColor(DEFAULT_COLOR);
-        mPaint.setStyle(Paint.Style.FILL_AND_STROKE);
-        textPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-        textPaint.setTextSize(20);
+
+    /**
+     * Draw the canvas items
+     */
+    protected void onDraw(Canvas canvas) {
+
+        if(lines != null){
+            for(Path p: lines){
+                canvas.drawPath(p, mPaint);
+            }// end for
+            if(activePath != null)
+                canvas.drawPath(activePath, mPaint);
+        }// end if
     }
 
+
+    /**
+     * When the users finger is placed on the screem
+     * @param x coordinate
+     * @param y The y coordinate.
+     * @param v The view touched
+     */
+    public void touchDown(float x, float y, View v){
+        if(lines == null)
+            lines = new ArrayList<>();
+        if(activePath == null)
+            activePath = new Path();
+
+        activePath.moveTo(x,y);
+
+    }
+
+    /**
+     * When the users finger is dragged.
+     * @param x coordinate
+     * @param y The y coordinate.
+     * @param v The view touched
+     */
+    public void touchMove(float x, float y, View v){
+        //Your Code here
+        activePath.lineTo(x,y);
+    }
+
+    /**
+     * When the users finger is lifted.
+     * @param x The x coordinate
+     * @param y The y coordinate.
+     * @param v The view touched
+     */
+    public void touchUp(float x, float y,View v){
+        //Your code here
+        lines.add(activePath);
+        activePath = null;
+    }
+
+    /**
+     * When the view is touched.
+     */
     @Override
-    public boolean onTouchEvent(MotionEvent event) {
+    public boolean onTouch(View v, MotionEvent event) {
 
-        // get pointer index from the event object
-        int pointerIndex = event.getActionIndex();
+        Log.v("TouchDemo","Touch");
 
-        // get pointer ID
-        int pointerId = event.getPointerId(pointerIndex);
+        //Define drawable attibutes.
+        float x = event.getX();
+        float y = event.getY();
 
-        // get masked (not specific to a pointer) action
-        int maskedAction = event.getActionMasked();
 
-        switch (maskedAction) {
-
+        switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
-            case MotionEvent.ACTION_POINTER_DOWN: {
-                // We have a new pointer. Lets add it to the list of pointers
-
-                PointF f = new PointF();
-                f.x = event.getX(pointerIndex);
-                f.y = event.getY(pointerIndex);
-                mActivePointers.put(pointerId, f);
+                touchDown(x, y, v);
                 break;
-            }
-            case MotionEvent.ACTION_MOVE: { // a pointer was moved
-                for (int size = event.getPointerCount(), i = 0; i < size; i++) {
-                    PointF point = mActivePointers.get(event.getPointerId(i));
-                    if (point != null) {
-                        point.x = event.getX(i);
-                        point.y = event.getY(i);
-                    }
-                }
+            case MotionEvent.ACTION_MOVE:
+                touchMove(x, y, v);
                 break;
-            }
             case MotionEvent.ACTION_UP:
-            case MotionEvent.ACTION_POINTER_UP:
-            case MotionEvent.ACTION_CANCEL: {
-                mActivePointers.remove(pointerId);
+                touchUp(x,y,v);
                 break;
-            }
-        }
+        }//end switch
+
         invalidate();
 
         return true;
-    }
 
-    @Override
-    protected void onDraw(Canvas canvas) {
-        super.onDraw(canvas);
+    } // end onDraw method
 
-        // draw all pointers
-        for (int size = mActivePointers.size(), i = 0; i < size; i++) {
-            PointF point = mActivePointers.valueAt(i);
-            if (point != null)
-                mPaint.setColor(colors[i % 9]);
-            canvas.drawCircle(point.x, point.y, SIZE, mPaint);
-
-
-
-        }
-        canvas.drawText("Total pointers: " + mActivePointers.size(), 10, 40 , textPaint);
-    }
-
-}//#######################################################
+} // end CustomView class
