@@ -6,13 +6,6 @@
     android:weightSum="10"
     tools:context=".PaintActivity" >
 
-    <EditText
-        android:id="@+id/painting_name"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:text="NewPainting"
-        />
-
     <view
         class="edu.cs.wcu.weball1.paintmeister.CustomView"
         android:id="@+id/view1"

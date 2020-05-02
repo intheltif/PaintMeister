@@ -1,8 +1,10 @@
 package edu.cs.wcu.weball1.paintmeister;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.AppComponentFactory;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.ShapeDrawable;
 import android.os.Bundle;
@@ -27,7 +29,7 @@ import java.io.IOException;
 public class PaintActivity extends AppCompatActivity implements OnTouchListener {
     CustomView touchArea;
     TextView tv;
-    EditText name;
+    Menu menu;
 
     private ShapeDrawable[] mDrawable = new ShapeDrawable[5];
 
@@ -44,25 +46,32 @@ public class PaintActivity extends AppCompatActivity implements OnTouchListener 
         //	touchArea.setOnTouchListener(this);
 
         tv = (TextView) this.findViewById(R.id.textView1);
-        name = (EditText) this.findViewById(R.id.painting_name);
 
         Bundle extras = this.getIntent().getExtras();
 
         if (extras != null) {
-            name.setText(extras.getString("fileName"));
             this.setPictureFromSavedFile(extras.getString("loadedFile"));
         }
     } //==========================================================
 
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.action_bar, menu);
+        this.menu = menu;
+
+        Bundle extras = this.getIntent().getExtras();
+
+        if(extras != null) {
+            MenuItem item = this.menu.findItem(R.id.painting_title);
+            item.setTitle(extras.getString("fileName"));
+        }
+
         return true;
-    }
+    } // end onCreateOptionsMenu
 
     private void setPictureFromSavedFile(String loadedFile) {
         String fileText = getFileText(loadedFile);
         this.touchArea.setDrawingFromString(fileText);
-    }
+    } // end setPictureFromSavedFile
 
     private String getFileText(String fileName) {
         StringBuilder text = new StringBuilder();
@@ -82,7 +91,7 @@ public class PaintActivity extends AppCompatActivity implements OnTouchListener 
         }
 
         return text.toString();
-    }
+    } // end getFileText
 
     //===========================================================
     /**
@@ -110,6 +119,11 @@ public class PaintActivity extends AppCompatActivity implements OnTouchListener 
         return false;
     }//===========================================================
 
+    /**
+     * Behavior to be completed when an action bar item is clicked
+     * @param item the action bar item that was clicked
+     * @return true if the action could be completed, false otherwise
+     */
     public boolean onOptionsItemSelected(MenuItem item) {
         switch(item.getItemId()) {
             case R.id.preferences:
@@ -121,17 +135,54 @@ public class PaintActivity extends AppCompatActivity implements OnTouchListener 
             case R.id.load_button:
                 this.onLoadButtonClicked();
                 break;
+            case R.id.painting_title:
+                this.onPaintingTitleClicked();
+                break;
         }
 
         return super.onOptionsItemSelected(item);
-    }
+    } // end onOptionsItemSelected
+
+    /**
+     * Behavior to be completed when the painting's title is clicked
+     */
+    public void onPaintingTitleClicked() {
+        AlertDialog.Builder inputTitleChange = new AlertDialog.Builder(this);
+        inputTitleChange.setTitle("Change painting title?");
+        inputTitleChange.setMessage("What is the new title of your painting?");
+        final EditText newTitle = new EditText(this);
+        inputTitleChange.setView(newTitle);
+        inputTitleChange.setPositiveButton("Rename", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                String newTitleText = newTitle.getText().toString();
+                if (!newTitleText.equals("")) {
+                    MenuItem item = menu.findItem(R.id.painting_title);
+                    item.setTitle(newTitleText);
+                } // end if
+
+                dialog.dismiss();
+            } // end onClick
+        }); // end setPositiveButton
+        inputTitleChange.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            } // end onClick
+        }); // end setNegativeButton
+
+        AlertDialog prompt = inputTitleChange.create();
+        prompt.show();
+    } // end onPaintingTitleClicked
 
     /**
      * Behavior to be completed when the save button is clicked
      */
     public void onSaveButtonClicked() {
         FileOutputStream stream;
-        String fileName = name.getText().toString();
+
+        MenuItem item = menu.findItem(R.id.painting_title);
+        String fileName = item.getTitle().toString();
 
         // See if I can load files from directory
         File[] files = this.getFilesDir().listFiles();
@@ -153,9 +204,12 @@ public class PaintActivity extends AppCompatActivity implements OnTouchListener 
     public void onLoadButtonClicked() {
         Intent loadScreen = new Intent(this, LoadScreen.class);
         this.startActivity(loadScreen);
-    }
+    } // end onLoadButtonClicked
 
+    /**
+     * Behavior to be completed when the preferences button is clicked
+     */
     public void onPreferencesButtonClicked() {
         Toast.makeText(this, "Preferences clicked", Toast.LENGTH_SHORT).show();
-    }
+    } // end onPreferencesButtonClicked
 } // end PaintActivity

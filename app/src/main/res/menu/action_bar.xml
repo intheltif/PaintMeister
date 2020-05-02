@@ -4,7 +4,7 @@
         android:title="Action Settings"
         android:icon="@drawable/ic_action_settings"
         android:orderInCategory="4"
-        app:showAsAction="always"/>
+        app:showAsAction="ifRoom"/>
 
     <item
         android:id="@+id/save_button"
@@ -19,5 +19,12 @@
         android:icon="@drawable/ic_action_load"
         android:orderInCategory="3"
         app:showAsAction="ifRoom"/>
+
+    <item
+        android:id="@+id/painting_title"
+        android:title="New Painting"
+        android:orderInCategory="1"
+        app:showAsAction="always"
+        />
 
 </menu>
