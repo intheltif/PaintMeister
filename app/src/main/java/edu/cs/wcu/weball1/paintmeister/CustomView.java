@@ -37,7 +37,7 @@ public class CustomView extends View implements View.OnTouchListener {
     /**The pain that is currently used to draw**/
     Paint mPaint;
 
-    StringBuilder xml;
+    StringBuilder stringRepresentation;
 
     /**
      * Called when the custom view is initialized
@@ -54,8 +54,7 @@ public class CustomView extends View implements View.OnTouchListener {
         mPaint.setStrokeWidth(6);
         mPaint.setColor(Color.GREEN);
 
-        this.xml = new StringBuilder();
-        this.xml.append("<drawing>\n");
+        this.stringRepresentation = new StringBuilder();
     }
 
 
@@ -70,8 +69,6 @@ public class CustomView extends View implements View.OnTouchListener {
             }// end for
             if(activePath != null) {
                 canvas.drawPath(activePath, mPaint);
-            } else {
-                this.xml.append("<path>\n");
             }
 
         }// end if
@@ -90,9 +87,9 @@ public class CustomView extends View implements View.OnTouchListener {
         if(activePath == null)
             activePath = new Path();
 
-        this.xml.append("<path>\n<coordinate>\n<x>" + x + "</x>\n</y>" + y + "</y>\n</coordinate>\n");
-
         activePath.moveTo(x,y);
+
+        this.stringRepresentation.append("# " + x + " " + y + " ");
     }
 
     /**
@@ -117,9 +114,7 @@ public class CustomView extends View implements View.OnTouchListener {
         lines.add(activePath);
         activePath = null;
 
-        this.xml.append("<coordinate>\n<x>" + x + "</x>\n</y>" + y + "</y>\n</coordinate>\n");
-
-        this.xml.append("</path>\n");
+        this.stringRepresentation.append(x + " " + y + "\n");
     }
 
     /**
@@ -157,11 +152,8 @@ public class CustomView extends View implements View.OnTouchListener {
         return this.lines;
     }
 
-    public String toXML() {
-        // remove the last added path tag
-        this.xml.setLength(this.xml.length() - 7);
-
-        return this.xml.toString() + "</drawing>";
+    public String getStringRepresentation() {
+        return this.stringRepresentation.toString();
     }
 
 } // end CustomView class

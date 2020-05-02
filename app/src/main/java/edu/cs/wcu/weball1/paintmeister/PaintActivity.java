@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnTouchListener;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,6 +28,8 @@ public class PaintActivity extends Activity implements OnTouchListener {
 
     CustomView touchArea;
     TextView tv;
+    EditText name;
+
 
     private ShapeDrawable[] mDrawable = new ShapeDrawable[5];
 
@@ -43,6 +46,8 @@ public class PaintActivity extends Activity implements OnTouchListener {
         //	touchArea.setOnTouchListener(this);
 
         tv = (TextView) this.findViewById(R.id.textView1);
+
+        name = (EditText) this.findViewById(R.id.painting_name);
 
         //touchArea.setTextView(tv);
 
@@ -77,14 +82,16 @@ public class PaintActivity extends Activity implements OnTouchListener {
     public void onSaveButtonClicked(View v) {
         FileOutputStream stream;
 
+        String fileName = name.getText().toString();
+
         try {
-            stream = openFileOutput("test.txt", Context.MODE_PRIVATE);
-            stream.write(this.touchArea.toXML().getBytes());
+            stream = openFileOutput(fileName, Context.MODE_PRIVATE);
+            stream.write(this.touchArea.getStringRepresentation().getBytes());
             stream.close();
         } catch (Exception e) {
             // do nothing
         }
 
-        Toast.makeText(this, "Attempted to save", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Saved", Toast.LENGTH_SHORT).show();
     }
 }
