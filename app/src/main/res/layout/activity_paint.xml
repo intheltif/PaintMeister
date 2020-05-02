@@ -23,28 +23,5 @@
         android:layout_weight="9"
         android:background="@color/white" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:orientation="horizontal"
-        android:weightSum="2">
-
-        <Button
-            android:id="@+id/save_button"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:onClick="onSaveButtonClicked"
-            android:text="Save"
-            android:layout_width="0dp" />
-
-        <Button
-            android:id="@+id/load_button"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:onClick="onLoadButtonClicked"
-            android:text="Load" />
-
-    </LinearLayout>
 
 </LinearLayout>

@@ -115,6 +115,12 @@ public class PaintActivity extends AppCompatActivity implements OnTouchListener 
             case R.id.preferences:
                 this.onPreferencesButtonClicked();
                 break;
+            case R.id.save_button:
+                this.onSaveButtonClicked();
+                break;
+            case R.id.load_button:
+                this.onLoadButtonClicked();
+                break;
         }
 
         return super.onOptionsItemSelected(item);
@@ -122,9 +128,8 @@ public class PaintActivity extends AppCompatActivity implements OnTouchListener 
 
     /**
      * Behavior to be completed when the save button is clicked
-     * @param v the save button that was clicked
      */
-    public void onSaveButtonClicked(View v) {
+    public void onSaveButtonClicked() {
         FileOutputStream stream;
         String fileName = name.getText().toString();
 
@@ -144,9 +149,8 @@ public class PaintActivity extends AppCompatActivity implements OnTouchListener 
 
     /**
      * Behavior to be performed when the load button is clicked
-     * @param v the load button that was clicked
      */
-    public void onLoadButtonClicked(View v) {
+    public void onLoadButtonClicked() {
         Intent loadScreen = new Intent(this, LoadScreen.class);
         this.startActivity(loadScreen);
     }
