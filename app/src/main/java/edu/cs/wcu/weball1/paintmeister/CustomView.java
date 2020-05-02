@@ -37,6 +37,7 @@ public class CustomView extends View implements View.OnTouchListener {
     /**The pain that is currently used to draw**/
     Paint mPaint;
 
+    /** Holds the text data for saving/loading paintings */
     StringBuilder stringRepresentation;
 
     /**
@@ -148,13 +149,14 @@ public class CustomView extends View implements View.OnTouchListener {
 
     } // end onDraw method
 
-    public List<Path> getLines() {
-        return this.lines;
-    }
 
+    /**
+     * Provides the textual representation of this drawing
+     * @return the textual representation of this drawing
+     */
     public String getStringRepresentation() {
         return this.stringRepresentation.toString();
-    }
+    } // end getStringRepresentation
 
 } // end CustomView class
 

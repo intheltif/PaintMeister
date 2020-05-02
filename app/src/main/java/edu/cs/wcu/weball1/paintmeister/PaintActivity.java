@@ -78,7 +78,11 @@ public class PaintActivity extends Activity implements OnTouchListener {
 
         return false;
     }//===========================================================
-    
+
+    /**
+     * Behavior to be completed when the save button is clicked
+     * @param v the save button that was clicked
+     */
     public void onSaveButtonClicked(View v) {
         FileOutputStream stream;
 
