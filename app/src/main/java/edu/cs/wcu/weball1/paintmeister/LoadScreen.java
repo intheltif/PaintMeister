@@ -46,11 +46,11 @@ public class LoadScreen extends AppCompatActivity implements MyAdapter.ItemWasCl
 
     @Override
     public void itemClicked(String text) {
-//        Intent paintScreen = new Intent(this, PaintActivity.class);
-////        paintScreen.putExtra("loadedFile", text);
-////        this.startActivity(paintScreen);
+        Intent paintScreen = new Intent(this, PaintActivity.class);
         String fullPath = this.getFilesDir().toString();
         fullPath += "/" + text;
-        Toast.makeText(this, fullPath, Toast.LENGTH_SHORT).show();
+        paintScreen.putExtra("loadedFile", fullPath);
+        paintScreen.putExtra("fileName", text);
+        this.startActivity(paintScreen);
     }
 }

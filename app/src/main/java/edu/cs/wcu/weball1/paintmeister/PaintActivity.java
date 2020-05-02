@@ -1,14 +1,9 @@
 package edu.cs.wcu.weball1.paintmeister;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.Activity;
 import android.content.Context;
-import android.graphics.Path;
 import android.graphics.drawable.ShapeDrawable;
-import android.media.MediaScannerConnection;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnTouchListener;
@@ -16,20 +11,17 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.io.BufferedWriter;
+import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.FileWriter;
+import java.io.FileReader;
 import java.io.IOException;
-import java.util.List;
 
 public class PaintActivity extends Activity implements OnTouchListener {
 
     CustomView touchArea;
     TextView tv;
     EditText name;
-
 
     private ShapeDrawable[] mDrawable = new ShapeDrawable[5];
 
@@ -46,12 +38,43 @@ public class PaintActivity extends Activity implements OnTouchListener {
         //	touchArea.setOnTouchListener(this);
 
         tv = (TextView) this.findViewById(R.id.textView1);
-
         name = (EditText) this.findViewById(R.id.painting_name);
+
+        Bundle extras = this.getIntent().getExtras();
+
+        if (extras != null) {
+            name.setText(extras.getString("fileName"));
+            this.setPictureFromSavedFile(extras.getString("loadedFile"));
+        }
 
         //touchArea.setTextView(tv);
 
     }//==========================================================
+
+    private void setPictureFromSavedFile(String loadedFile) {
+        String fileText = getFileText(loadedFile);
+        Toast.makeText(this, fileText, Toast.LENGTH_SHORT).show();
+    }
+
+    private String getFileText(String fileName) {
+        StringBuilder text = new StringBuilder();
+        try {
+            File file = new File(fileName);
+            BufferedReader br = new BufferedReader(new FileReader(file));
+            String line;
+
+            while ((line = br.readLine()) != null) {
+                text.append(line);
+                text.append('\n');
+            }
+            br.close();
+        }
+        catch (IOException e) {
+            //You'll need to add proper error handling here
+        }
+
+        return text.toString();
+    }
 
     //===========================================================
     /**
