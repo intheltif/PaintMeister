@@ -2,6 +2,7 @@ package edu.cs.wcu.weball1.paintmeister;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.drawable.ShapeDrawable;
 import android.os.Bundle;
 import android.view.MotionEvent;
@@ -119,4 +120,13 @@ public class PaintActivity extends Activity implements OnTouchListener {
 
         Toast.makeText(this, "Saved", Toast.LENGTH_SHORT).show();
     } // end onSaveButtonClicked
+
+    /**
+     * Behavior to be performed when the load button is clicked
+     * @param v the load button that was clicked
+     */
+    public void onLoadButtonClicked(View v) {
+        Intent loadScreen = new Intent(this, LoadScreen.class);
+        this.startActivity(loadScreen);
+    }
 } // end PaintActivity

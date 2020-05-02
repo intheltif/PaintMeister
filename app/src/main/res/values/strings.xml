@@ -5,4 +5,6 @@
     <string name="load_painting_btn_text">Load Painting</string>
     <string name="preferences_btn">Preferences</string>
     <string name="info_btn">About App</string>
+    <string name="save">SAVE</string>
+    <string name="load">LOAD</string>
 </resources>
