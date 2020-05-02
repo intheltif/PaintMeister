@@ -8,6 +8,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * The main menu of the application. Handles navigating to each portion of the app.
  *
@@ -41,11 +45,24 @@ public class MainMenuActivity extends AppCompatActivity {
             nextActivity = new Intent(this, PaintActivity.class);
             startActivity(nextActivity);
         } else if(v == loadPaintBtn) {
-            Toast.makeText(this, "Will be implemented soon...", Toast.LENGTH_SHORT).show();
+            this.loadPaintButtonPressed();
         } else if(v == prefsBtn) {
             Toast.makeText(this, "Will be implemented soon...", Toast.LENGTH_SHORT).show();
         } else if(v == aboutBtn) {
             Toast.makeText(this, "Will be implemented soon...", Toast.LENGTH_SHORT).show();
         } // end if statement
     } // end onClick method
+
+    private void loadPaintButtonPressed() {
+        File[] files = this.getFilesDir().listFiles();
+
+        List<String> fileNames = new ArrayList<>();
+
+        for (File file : files) {
+            fileNames.add(file.toString());
+        }
+
+        Toast.makeText(this, fileNames.get(0), Toast.LENGTH_SHORT).show();
+    }
+
 }

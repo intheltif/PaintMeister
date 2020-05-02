@@ -88,6 +88,9 @@ public class PaintActivity extends Activity implements OnTouchListener {
 
         String fileName = name.getText().toString();
 
+        // See if I can load files from directory
+        File[] files = this.getFilesDir().listFiles();
+
         try {
             stream = openFileOutput(fileName, Context.MODE_PRIVATE);
             stream.write(this.touchArea.getStringRepresentation().getBytes());
