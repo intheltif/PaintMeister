@@ -1,10 +1,13 @@
 package edu.cs.wcu.weball1.paintmeister;
 
 import android.app.Activity;
+import android.app.AppComponentFactory;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.ShapeDrawable;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnTouchListener;
@@ -12,13 +15,16 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
 
-public class PaintActivity extends Activity implements OnTouchListener {
+public class PaintActivity extends AppCompatActivity implements OnTouchListener {
     CustomView touchArea;
     TextView tv;
     EditText name;
@@ -47,6 +53,11 @@ public class PaintActivity extends Activity implements OnTouchListener {
             this.setPictureFromSavedFile(extras.getString("loadedFile"));
         }
     } //==========================================================
+
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.action_bar, menu);
+        return true;
+    }
 
     private void setPictureFromSavedFile(String loadedFile) {
         String fileText = getFileText(loadedFile);
@@ -99,6 +110,16 @@ public class PaintActivity extends Activity implements OnTouchListener {
         return false;
     }//===========================================================
 
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch(item.getItemId()) {
+            case R.id.preferences:
+                this.onPreferencesButtonClicked();
+                break;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
     /**
      * Behavior to be completed when the save button is clicked
      * @param v the save button that was clicked
@@ -128,5 +149,9 @@ public class PaintActivity extends Activity implements OnTouchListener {
     public void onLoadButtonClicked(View v) {
         Intent loadScreen = new Intent(this, LoadScreen.class);
         this.startActivity(loadScreen);
+    }
+
+    public void onPreferencesButtonClicked() {
+        Toast.makeText(this, "Preferences clicked", Toast.LENGTH_SHORT).show();
     }
 } // end PaintActivity
