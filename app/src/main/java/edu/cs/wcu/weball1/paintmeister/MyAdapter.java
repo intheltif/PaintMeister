@@ -28,6 +28,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder>  imp
         String filePath = this.data.get(position);
         String[] filePieces = filePath.split("/");
         holder.fileName.setText(filePieces[filePieces.length - 1]);
+        holder.root.setTag(filePieces[filePieces.length - 1]);
     }
 
     @NonNull

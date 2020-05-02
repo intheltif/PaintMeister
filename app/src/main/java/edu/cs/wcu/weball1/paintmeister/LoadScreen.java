@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -45,8 +46,11 @@ public class LoadScreen extends AppCompatActivity implements MyAdapter.ItemWasCl
 
     @Override
     public void itemClicked(String text) {
-        Intent paintScreen = new Intent(this, PaintActivity.class);
-        paintScreen.putExtra("loadedFile", text);
-        this.startActivity(paintScreen);
+//        Intent paintScreen = new Intent(this, PaintActivity.class);
+////        paintScreen.putExtra("loadedFile", text);
+////        this.startActivity(paintScreen);
+        String fullPath = this.getFilesDir().toString();
+        fullPath += "/" + text;
+        Toast.makeText(this, fullPath, Toast.LENGTH_SHORT).show();
     }
 }
