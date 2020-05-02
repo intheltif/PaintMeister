@@ -11,8 +11,10 @@ import android.util.Log;
 import android.util.SparseArray;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A custom view to capture onClickEvents and draw paths where the user clicks on the screen.
@@ -35,6 +37,7 @@ public class CustomView extends View implements View.OnTouchListener {
     /**The pain that is currently used to draw**/
     Paint mPaint;
 
+    StringBuilder xml;
 
     /**
      * Called when the custom view is initialized
@@ -50,6 +53,9 @@ public class CustomView extends View implements View.OnTouchListener {
         mPaint.setStyle(Paint.Style.STROKE);
         mPaint.setStrokeWidth(6);
         mPaint.setColor(Color.GREEN);
+
+        this.xml = new StringBuilder();
+        this.xml.append("<drawing>\n");
     }
 
 
@@ -62,8 +68,12 @@ public class CustomView extends View implements View.OnTouchListener {
             for(Path p: lines){
                 canvas.drawPath(p, mPaint);
             }// end for
-            if(activePath != null)
+            if(activePath != null) {
                 canvas.drawPath(activePath, mPaint);
+            } else {
+                this.xml.append("<path>\n");
+            }
+
         }// end if
     }
 
@@ -80,8 +90,9 @@ public class CustomView extends View implements View.OnTouchListener {
         if(activePath == null)
             activePath = new Path();
 
-        activePath.moveTo(x,y);
+        this.xml.append("<path>\n<coordinate>\n<x>" + x + "</x>\n</y>" + y + "</y>\n</coordinate>\n");
 
+        activePath.moveTo(x,y);
     }
 
     /**
@@ -105,6 +116,10 @@ public class CustomView extends View implements View.OnTouchListener {
         //Your code here
         lines.add(activePath);
         activePath = null;
+
+        this.xml.append("<coordinate>\n<x>" + x + "</x>\n</y>" + y + "</y>\n</coordinate>\n");
+
+        this.xml.append("</path>\n");
     }
 
     /**
@@ -115,7 +130,7 @@ public class CustomView extends View implements View.OnTouchListener {
 
         Log.v("TouchDemo","Touch");
 
-        //Define drawable attibutes.
+        //Define drawable attributes.
         float x = event.getX();
         float y = event.getY();
 
@@ -138,4 +153,16 @@ public class CustomView extends View implements View.OnTouchListener {
 
     } // end onDraw method
 
+    public List<Path> getLines() {
+        return this.lines;
+    }
+
+    public String toXML() {
+        // remove the last added path tag
+        this.xml.setLength(this.xml.length() - 7);
+
+        return this.xml.toString() + "</drawing>";
+    }
+
 } // end CustomView class
+

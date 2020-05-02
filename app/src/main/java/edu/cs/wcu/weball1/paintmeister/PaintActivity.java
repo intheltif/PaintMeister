@@ -3,12 +3,25 @@ package edu.cs.wcu.weball1.paintmeister;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
+import android.content.Context;
+import android.graphics.Path;
 import android.graphics.drawable.ShapeDrawable;
+import android.media.MediaScannerConnection;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnTouchListener;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.List;
 
 public class PaintActivity extends Activity implements OnTouchListener {
 
@@ -60,4 +73,18 @@ public class PaintActivity extends Activity implements OnTouchListener {
 
         return false;
     }//===========================================================
+    
+    public void onSaveButtonClicked(View v) {
+        FileOutputStream stream;
+
+        try {
+            stream = openFileOutput("test.txt", Context.MODE_PRIVATE);
+            stream.write(this.touchArea.toXML().getBytes());
+            stream.close();
+        } catch (Exception e) {
+            // do nothing
+        }
+
+        Toast.makeText(this, "Attempted to save", Toast.LENGTH_SHORT).show();
+    }
 }
