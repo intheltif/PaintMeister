@@ -1,6 +1,7 @@
 package edu.cs.wcu.weball1.paintmeister;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -14,6 +15,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -49,7 +51,6 @@ public class CustomView extends View implements View.OnTouchListener {
 
         this.setOnTouchListener(this);
 
-
         mPaint = new Paint();
         mPaint.setStyle(Paint.Style.STROKE);
         mPaint.setStrokeWidth(6);
@@ -58,12 +59,11 @@ public class CustomView extends View implements View.OnTouchListener {
         this.stringRepresentation = new StringBuilder();
     }
 
-
     /**
      * Draw the canvas items
      */
+    @Override
     protected void onDraw(Canvas canvas) {
-
         if(lines != null){
             for(Path p: lines){
                 canvas.drawPath(p, mPaint);
@@ -73,8 +73,7 @@ public class CustomView extends View implements View.OnTouchListener {
             }
 
         }// end if
-    }
-
+    } // end onDraw
 
     /**
      * When the users finger is placed on the screem
@@ -102,7 +101,7 @@ public class CustomView extends View implements View.OnTouchListener {
     public void touchMove(float x, float y, View v){
         //Your Code here
         activePath.lineTo(x,y);
-        this.stringRepresentation.append(x + " " + y);
+        this.stringRepresentation.append(x + " " + y + " ");
     }
 
     /**
@@ -150,7 +149,6 @@ public class CustomView extends View implements View.OnTouchListener {
 
     } // end onDraw method
 
-
     /**
      * Provides the textual representation of this drawing
      * @return the textual representation of this drawing
@@ -158,6 +156,46 @@ public class CustomView extends View implements View.OnTouchListener {
     public String getStringRepresentation() {
         return this.stringRepresentation.toString();
     } // end getStringRepresentation
+
+    /**
+     * Takes in a string (from a file) and parses it and converts it into a painting
+     * @param fileText the text from the file that has a saved painting
+     */
+    public void setDrawingFromString(String fileText) {
+        // Save the text to be added onto later
+        this.stringRepresentation = new StringBuilder(fileText);
+
+        // Split the text file into pieces for parsing
+        String[] fileCommands = fileText.split("\\s+");
+        this.activePath = null;
+        this.lines = new ArrayList<>();
+
+        int i = 0;
+        while(i < fileCommands.length) {
+            // if this is the start of a new path
+            if (fileCommands[i].equals("#")) {
+                if (this.activePath != null) {
+                    lines.add(this.activePath);
+                } // end inner-if
+
+                this.activePath = new Path();
+            } else {
+                float xCoor = Float.parseFloat(fileCommands[i]);
+                i++;
+                float yCoor = Float.parseFloat(fileCommands[i]);
+
+                // if this is the first "dot" in the line, move to it
+                // otherwise, draw a line to it
+                if (fileCommands[i - 2].equals("#")) {
+                    this.activePath.moveTo(xCoor, yCoor);
+                } else {
+                    this.activePath.lineTo(xCoor, yCoor);
+                } // end if-else
+            } // end outer-else
+
+            i++;
+        } // end while
+    } // end setDrawingFromString
 
 } // end CustomView class
 

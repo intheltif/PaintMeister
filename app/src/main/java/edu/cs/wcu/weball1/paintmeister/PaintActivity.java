@@ -18,7 +18,6 @@ import java.io.FileReader;
 import java.io.IOException;
 
 public class PaintActivity extends Activity implements OnTouchListener {
-
     CustomView touchArea;
     TextView tv;
     EditText name;
@@ -46,14 +45,11 @@ public class PaintActivity extends Activity implements OnTouchListener {
             name.setText(extras.getString("fileName"));
             this.setPictureFromSavedFile(extras.getString("loadedFile"));
         }
-
-        //touchArea.setTextView(tv);
-
-    }//==========================================================
+    } //==========================================================
 
     private void setPictureFromSavedFile(String loadedFile) {
         String fileText = getFileText(loadedFile);
-        Toast.makeText(this, fileText, Toast.LENGTH_SHORT).show();
+        this.touchArea.setDrawingFromString(fileText);
     }
 
     private String getFileText(String fileName) {
@@ -108,7 +104,6 @@ public class PaintActivity extends Activity implements OnTouchListener {
      */
     public void onSaveButtonClicked(View v) {
         FileOutputStream stream;
-
         String fileName = name.getText().toString();
 
         // See if I can load files from directory
@@ -120,8 +115,8 @@ public class PaintActivity extends Activity implements OnTouchListener {
             stream.close();
         } catch (Exception e) {
             // do nothing
-        }
+        } // end catch
 
         Toast.makeText(this, "Saved", Toast.LENGTH_SHORT).show();
-    }
-}
+    } // end onSaveButtonClicked
+} // end PaintActivity
