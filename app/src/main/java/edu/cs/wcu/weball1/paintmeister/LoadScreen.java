@@ -36,7 +36,7 @@ public class LoadScreen extends AppCompatActivity implements MyAdapter.ItemWasCl
 
         // Set up recycler view
         this.recyclerView = findViewById(R.id.file_name_view);
-        this.myAdapter = new MyAdapter(this.fileNames, this, this.getResources());
+        this.myAdapter = new MyAdapter(this.fileNames, this);
         this.recyclerView.setHasFixedSize(true);
         this.layoutManager = new LinearLayoutManager(this);
         this.recyclerView.setLayoutManager(this.layoutManager);
