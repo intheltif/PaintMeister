@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".PaintActivity"></activity>
+        <activity android:name=".LoadScreen"></activity>
+        <activity android:name=".PaintActivity" />
         <activity android:name=".MainMenuActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>

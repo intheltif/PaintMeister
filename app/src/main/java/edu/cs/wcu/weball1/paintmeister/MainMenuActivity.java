@@ -54,15 +54,17 @@ public class MainMenuActivity extends AppCompatActivity {
     } // end onClick method
 
     private void loadPaintButtonPressed() {
-        File[] files = this.getFilesDir().listFiles();
-
-        List<String> fileNames = new ArrayList<>();
-
-        for (File file : files) {
-            fileNames.add(file.toString());
-        }
-
-        Toast.makeText(this, fileNames.get(0), Toast.LENGTH_SHORT).show();
+        Intent loadScreen = new Intent(this, LoadScreen.class);
+        this.startActivity(loadScreen);
+//        File[] files = this.getFilesDir().listFiles();
+//
+//        List<String> fileNames = new ArrayList<>();
+//
+//        for (File file : files) {
+//            fileNames.add(file.toString());
+//        }
+//
+//        Toast.makeText(this, fileNames.toString(), Toast.LENGTH_SHORT).show();
     }
 
 }

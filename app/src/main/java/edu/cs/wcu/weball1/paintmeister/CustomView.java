@@ -102,6 +102,7 @@ public class CustomView extends View implements View.OnTouchListener {
     public void touchMove(float x, float y, View v){
         //Your Code here
         activePath.lineTo(x,y);
+        this.stringRepresentation.append(x + " " + y);
     }
 
     /**
