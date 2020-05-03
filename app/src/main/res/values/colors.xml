@@ -1,9 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- Android default colors -->
     <color name="colorPrimary">#6200EE</color>
     <color name="colorPrimaryDark">#3700B3</color>
     <color name="colorAccent">#03DAC5</color>
 
+    <!-- WCU Official Colors -->
+    <color name="wcu_purple">#592c88</color>
+    <color name="wcu_gold">#c1a875</color>
+
+    <!-- Selection of colors -->
     <color name="black">#000000</color>
     <color name="blue">#222266</color>
     <color name="lt_blue">#4444cc</color>

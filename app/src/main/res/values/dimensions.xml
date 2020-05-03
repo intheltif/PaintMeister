@@ -2,6 +2,8 @@
 <resources>
     <dimen name="splash_txt_size">60sp</dimen>
     <dimen name="title_txt_size">48sp</dimen>
+    <dimen name="subtitle_txt_size">40sp</dimen>
+    <dimen name="dev_name_size">34sp</dimen>
     <dimen name="default_btn_text_size">24sp</dimen>
 
     <!-- Default screen margins, per the Android Design guidelines. -->

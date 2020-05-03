@@ -1,9 +1,108 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:weightSum="10"
+    android:background="@color/wcu_purple"
     tools:context=".AboutActivity">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:text="@string/info_title"
+        android:textSize="@dimen/title_txt_size"
+        android:textColor="@color/wcu_gold" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="3"
+        android:weightSum="2"
+        android:orientation="horizontal" >
+
+        <!-- TODO: Add Chris' photo -->
+        <ImageView
+            android:id="@+id/iv_chris_photo"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:contentDescription="@string/chris_photo_desc"/>
+
+        <ImageView
+            android:id="@+id/iv_evert_photo"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:contentDescription="@string/evert_photo_desc"
+            app:srcCompat="@drawable/evert_pic" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/dev_names_subtitle"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:paddingLeft="@dimen/activity_vertical_margin"
+        android:paddingStart="@dimen/activity_vertical_margin"
+        android:paddingRight="@dimen/activity_vertical_margin"
+        android:text="@string/info_devs_subtitle"
+        android:textSize="@dimen/subtitle_txt_size"
+        android:textColor="@color/wcu_gold" />
+
+    <TextView
+        android:id="@+id/tv_dev1"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:text="@string/dev_name1"
+        android:textSize="@dimen/dev_name_size"
+        android:textColor="@color/wcu_gold" />
+
+    <TextView
+        android:id="@+id/tv_dev2"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:text="@string/dev_name2"
+        android:textSize="@dimen/dev_name_size"
+        android:textColor="@color/wcu_gold" />
+
+    <TextView
+        android:id="@+id/tv_date_created_subtitle"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:paddingLeft="@dimen/activity_vertical_margin"
+        android:paddingStart="@dimen/activity_vertical_margin"
+        android:paddingRight="@dimen/activity_vertical_margin"
+        android:text="@string/date_created_subtitle"
+        android:textSize="@dimen/subtitle_txt_size"
+        android:textColor="@color/wcu_gold" />
+
+    <TextView
+        android:id="@+id/tv_date_created"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:text="@string/date_created"
+        android:textSize="@dimen/dev_name_size"
+        android:textColor="@color/wcu_gold" />
+
+    <TextView
+        android:id="@+id/tv_app_description"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:text="@string/app_description"
+        android:textColor="@color/wcu_gold" />
+</LinearLayout>
