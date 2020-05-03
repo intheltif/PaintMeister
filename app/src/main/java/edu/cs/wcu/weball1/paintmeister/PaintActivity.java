@@ -1,26 +1,17 @@
 package edu.cs.wcu.weball1.paintmeister;
 
-import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.AppComponentFactory;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.drm.DrmStore;
-import android.graphics.drawable.ShapeDrawable;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.MotionEvent;
-import android.view.View;
-import android.view.View.OnTouchListener;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -28,12 +19,13 @@ import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
 
-public class PaintActivity extends AppCompatActivity implements OnTouchListener {
-    CustomView touchArea;
-    TextView tv;
-    Menu menu;
+public class PaintActivity extends AppCompatActivity {
 
-    private ShapeDrawable[] mDrawable = new ShapeDrawable[5];
+    /** Reference to the area on the screen that is being touched. */
+    CustomView touchArea;
+
+    /** Reference to the ActionBar menu */
+    Menu menu;
 
     /**
      * Called when the view is created.
@@ -52,10 +44,8 @@ public class PaintActivity extends AppCompatActivity implements OnTouchListener 
         }
 
 
-        touchArea = (CustomView) this.findViewById(R.id.view1);
+        touchArea = this.findViewById(R.id.view1);
         //	touchArea.setOnTouchListener(this);
-
-        tv = (TextView) this.findViewById(R.id.textView1);
 
         Bundle extras = this.getIntent().getExtras();
 
@@ -102,32 +92,6 @@ public class PaintActivity extends AppCompatActivity implements OnTouchListener 
 
         return text.toString();
     } // end getFileText
-
-    //===========================================================
-    /**
-     * Called when the view instance is touched by the user.
-     * @param v The view instance that was touched.
-     * @param event The motion event that carries the touch data.
-     */
-    //===========================================================
-    @Override
-    public boolean onTouch(View v, MotionEvent event) {
-
-        float raw_x = event.getRawX();
-        float raw_y = event.getRawY();
-
-        float axis_x = event.getAxisValue(MotionEvent.AXIS_X);
-        float axis_y = event.getAxisValue(MotionEvent.AXIS_Y);
-
-
-        float x = event.getX();
-        float y = event.getY();
-        tv.setText("RAW X:" + raw_x + "Y: " + raw_y +
-                "     AXIS X:" + axis_x + " Y:" + axis_y +
-                "     GETX:" + x + "  GETY:" + y);
-
-        return false;
-    }//===========================================================
 
     /**
      * Behavior to be completed when an action bar item is clicked

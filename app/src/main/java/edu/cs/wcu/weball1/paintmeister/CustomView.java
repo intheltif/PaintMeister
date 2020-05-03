@@ -30,9 +30,6 @@ public class CustomView extends View implements View.OnTouchListener {
     /** An array list of Path objects which make up the lines on the canvas **/
     private ArrayList<Path> lines;
 
-    /** An array of active points to allow multiple lines to be drawn at the same time */
-    private SparseArray<PointF> mActivePointers;
-
     /**The path currently being drawn by the user**/
     private Path activePath;
 
@@ -43,8 +40,10 @@ public class CustomView extends View implements View.OnTouchListener {
     StringBuilder stringRepresentation;
 
     /**
-     * Called when the custom view is initialized
-     * @param context
+     * Called when the custom view is initialized.
+     *
+     * @param context The application context
+     * @param attrs
      */
     public CustomView(Context context, AttributeSet attrs) {
         super(context,attrs);
