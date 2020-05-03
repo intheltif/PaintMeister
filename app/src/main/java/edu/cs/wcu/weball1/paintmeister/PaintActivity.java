@@ -6,6 +6,7 @@ import android.app.AppComponentFactory;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.drm.DrmStore;
 import android.graphics.drawable.ShapeDrawable;
 import android.os.Bundle;
 import android.view.Menu;
@@ -17,6 +18,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
@@ -41,6 +43,14 @@ public class PaintActivity extends AppCompatActivity implements OnTouchListener 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_paint);
+
+        // Setting up a back button on the action bar.
+        ActionBar actionBar = getSupportActionBar();
+        if(actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(true);
+            actionBar.setDisplayShowTitleEnabled(false);
+        }
+
 
         touchArea = (CustomView) this.findViewById(R.id.view1);
         //	touchArea.setOnTouchListener(this);
@@ -138,6 +148,10 @@ public class PaintActivity extends AppCompatActivity implements OnTouchListener 
             case R.id.painting_title:
                 this.onPaintingTitleClicked();
                 break;
+            case android.R.id.home:
+                // Exits w/out saving on back button pressed
+                // TODO: Maybe make this save when the button is pressed
+                finish();
         }
 
         return super.onOptionsItemSelected(item);

@@ -52,5 +52,6 @@ public class LoadScreen extends AppCompatActivity implements MyAdapter.ItemWasCl
         paintScreen.putExtra("loadedFile", fullPath);
         paintScreen.putExtra("fileName", text);
         this.startActivity(paintScreen);
+        finish();
     }
 }
