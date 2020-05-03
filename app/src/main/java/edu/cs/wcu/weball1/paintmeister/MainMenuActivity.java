@@ -49,7 +49,8 @@ public class MainMenuActivity extends AppCompatActivity {
         } else if(v == prefsBtn) {
             Toast.makeText(this, "Will be implemented soon...", Toast.LENGTH_SHORT).show();
         } else if(v == aboutBtn) {
-            Toast.makeText(this, "Will be implemented soon...", Toast.LENGTH_SHORT).show();
+            nextActivity = new Intent(this, AboutActivity.class);
+            startActivity(nextActivity);
         } // end if statement
     } // end onClick method
 
