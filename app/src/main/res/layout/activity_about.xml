@@ -25,13 +25,14 @@
         android:weightSum="2"
         android:orientation="horizontal" >
 
-        <!-- TODO: Add Chris' photo -->
         <ImageView
             android:id="@+id/iv_chris_photo"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:contentDescription="@string/chris_photo_desc"/>
+            android:contentDescription="@string/chris_photo_desc"
+            app:srcCompat="@drawable/chris_with_doggo"/>
+
 
         <ImageView
             android:id="@+id/iv_evert_photo"
