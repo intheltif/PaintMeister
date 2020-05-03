@@ -42,10 +42,11 @@ public class MainActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
 
-        /** Creating a new handler **/
+        //Creating a new handler
         handler = new Handler();
-        /** Setting the handler to the delayed time amount **/
+        // Setting the handler to the delayed time amount
         handler.postDelayed(runner, PAUSE);
+
     } // end onStart method
 
     /** Creating a new runnable object **/
@@ -56,6 +57,8 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void run() {
             goToNextScreen();
+            //remove this screen from the backstack after delay
+            finish();
         }
     }; // end runnable
 
