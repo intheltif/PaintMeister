@@ -102,7 +102,6 @@ public class CustomView extends View {
                 } // end outer-if
             } // end for
         } // end if
-
     } // end onDraw
 
     /**

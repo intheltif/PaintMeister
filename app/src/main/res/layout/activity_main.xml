@@ -6,17 +6,14 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <!-- TODO: Add a background to this screen -->
-
-    <TextView
+    <ImageView
         android:id="@+id/tv_app_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/app_name"
-        android:textSize="@dimen/splash_txt_size"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/paint_meister_splash_screen" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
