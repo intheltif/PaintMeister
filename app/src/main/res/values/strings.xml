@@ -30,4 +30,9 @@
     <!-- Image Descriptions -->
     <string name="chris_photo_desc">Photo of Chris Wolf, one of the developers of this app</string>
     <string name="evert_photo_desc">Photo of Evert Ball, one of the developers of this app</string>
+    <string name="save_text">Save</string>
+    <string name="paint_color_text">Choose Paint Color</string>
+    <string name="brush_width_text">Brush Width</string>
+    <string name="load_text">Load</string>
+    <string name="default_painting_title">New Painting</string>
 </resources>

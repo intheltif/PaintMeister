@@ -25,12 +25,26 @@ import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
 
+/**
+ * PaintActivity.java
+ *
+ * The screen that will allow users to paint to their canvas
+ *
+ * @author Evert Ball
+ * @author Chris Wolf
+ * @version 1.0.0 (May 4, 2020)
+ */
+
 public class PaintActivity extends AppCompatActivity {
 
-    /** Reference to the area on the screen that is being touched. */
+    /**
+     * Reference to the area on the screen that is being touched.
+     */
     CustomView touchArea;
 
-    /** Reference to the ActionBar menu */
+    /**
+     * Reference to the ActionBar menu
+     */
     Menu menu;
 
     /**
@@ -44,20 +58,17 @@ public class PaintActivity extends AppCompatActivity {
 
         // Setting up a back button on the action bar.
         ActionBar actionBar = getSupportActionBar();
-        if(actionBar != null) {
+        if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
             actionBar.setDisplayShowTitleEnabled(false);
-        }
-
+        } // end if
 
         touchArea = this.findViewById(R.id.view1);
-        //	touchArea.setOnTouchListener(this);
-
         Bundle extras = this.getIntent().getExtras();
 
         if (extras != null) {
             this.setPictureFromSavedFile(extras.getString("loadedFile"));
-        }
+        } // end if
     } //==========================================================
 
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -66,10 +77,10 @@ public class PaintActivity extends AppCompatActivity {
 
         Bundle extras = this.getIntent().getExtras();
 
-        if(extras != null) {
+        if (extras != null) {
             MenuItem item = this.menu.findItem(R.id.painting_title);
             item.setTitle(extras.getString("fileName"));
-        }
+        } // end if
 
         return true;
     } // end onCreateOptionsMenu
@@ -89,26 +100,23 @@ public class PaintActivity extends AppCompatActivity {
             while ((line = br.readLine()) != null) {
                 text.append(line);
                 text.append('\n');
-            }
+            } // end while
             br.close();
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             //You'll need to add proper error handling here
-        }
+        } // end catch
 
         return text.toString();
     } // end getFileText
 
     /**
      * Behavior to be completed when an action bar item is clicked
+     *
      * @param item the action bar item that was clicked
      * @return true if the action could be completed, false otherwise
      */
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch(item.getItemId()) {
-            case R.id.preferences:
-                this.onPreferencesButtonClicked();
-                break;
+        switch (item.getItemId()) {
             case R.id.save_button:
                 this.onSaveButtonClicked();
                 break;
@@ -126,7 +134,6 @@ public class PaintActivity extends AppCompatActivity {
                 break;
             case android.R.id.home:
                 // Exits w/out saving on back button pressed
-                // TODO: Maybe make this save when the button is pressed
                 finish();
                 break;
         } // end switch
@@ -182,8 +189,8 @@ public class PaintActivity extends AppCompatActivity {
             stream = openFileOutput(fileName, Context.MODE_PRIVATE);
             stream.write(this.touchArea.getStringRepresentation().getBytes());
             stream.close();
-        } catch (Exception e) {
-            // do nothing
+        } catch (IOException e) {
+            Toast.makeText(this, "ERROR -- Could not read from file!", Toast.LENGTH_SHORT).show();
         } // end catch
 
         Toast.makeText(this, "Saved", Toast.LENGTH_SHORT).show();
@@ -194,32 +201,39 @@ public class PaintActivity extends AppCompatActivity {
      */
     public void onLoadButtonClicked() {
         Intent loadScreen = new Intent(this, LoadScreen.class);
+        loadScreen.setFlags(Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT);
         this.startActivity(loadScreen);
     } // end onLoadButtonClicked
 
+    /**
+     * Behavior to be performed the color chooser is clicked
+     */
     private void onChooseColorClicked() {
         new ColorPickerDialog.Builder(this, AlertDialog.THEME_DEVICE_DEFAULT_DARK)
-      .setTitle("ColorPicker Dialog")
-      .setPreferenceName("MyColorPickerDialog")
-      .setPositiveButton(getString(R.string.confirm),
-          new ColorEnvelopeListener() {
-              @Override
-              public void onColorSelected(ColorEnvelope envelope, boolean fromUser) {
-                  touchArea.setPaintColor(envelope.getColor());
-              }
-          })
-       .setNegativeButton(getString(R.string.cancel),
-          new DialogInterface.OnClickListener() {
-              @Override
-              public void onClick(DialogInterface dialogInterface, int i) {
-                  dialogInterface.dismiss();
-              }
-           })
-      .attachAlphaSlideBar(true) // default is true. If false, do not show the AlphaSlideBar.
-      .attachBrightnessSlideBar(true)  // default is true. If false, do not show the BrightnessSlideBar.
-      .show();
-    }
+                .setTitle("ColorPicker Dialog")
+                .setPreferenceName("MyColorPickerDialog")
+                .setPositiveButton(getString(R.string.confirm),
+                        new ColorEnvelopeListener() {
+                            @Override
+                            public void onColorSelected(ColorEnvelope envelope, boolean fromUser) {
+                                touchArea.setPaintColor(envelope.getColor());
+                            }
+                        })
+                .setNegativeButton(getString(R.string.cancel),
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                dialogInterface.dismiss();
+                            }
+                        })
+                .attachAlphaSlideBar(true) // default is true. If false, do not show the AlphaSlideBar.
+                .attachBrightnessSlideBar(true)  // default is true. If false, do not show the BrightnessSlideBar.
+                .show();
+    } // end onBrushColorClicked
 
+    /**
+     * Behavior to be performed when the brush width action button is clicked
+     */
     private void onBrushWidthClicked() {
         AlertDialog.Builder brushWidthChange = new AlertDialog.Builder(this);
         brushWidthChange.setTitle("Change Brush Width");
@@ -227,7 +241,7 @@ public class PaintActivity extends AppCompatActivity {
         final EditText newWidth = new EditText(this);
         int maxLen = 3;
         newWidth.setInputType(InputType.TYPE_CLASS_NUMBER);
-        newWidth.setFilters(new InputFilter[] {new InputFilter.LengthFilter(maxLen)});
+        newWidth.setFilters(new InputFilter[]{new InputFilter.LengthFilter(maxLen)});
         brushWidthChange.setView(newWidth);
         brushWidthChange.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
             @Override
@@ -249,12 +263,5 @@ public class PaintActivity extends AppCompatActivity {
 
         AlertDialog prompt = brushWidthChange.create();
         prompt.show();
-    }
-
-    /**
-     * Behavior to be completed when the preferences button is clicked
-     */
-    public void onPreferencesButtonClicked() {
-        Toast.makeText(this, "Preferences clicked", Toast.LENGTH_SHORT).show();
-    } // end onPreferencesButtonClicked
+    } // end onBrushWidthClicked
 } // end PaintActivity

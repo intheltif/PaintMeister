@@ -8,26 +8,29 @@ import android.os.Bundle;
 import android.os.Handler;
 
 /**
+ * MainActivity.java
+ * <p>
  * The entry point int our application. A splash screen that waits for five
  * seconds and then continues to the main menu.
  *
  * @author Evert Ball
  * @author Chris Wolf
- *
- * @version 05 May 2020
- *
+ * @version (May 4, 2020)
  */
 public class MainActivity extends AppCompatActivity {
-
-    /** A constant value representing the length of the splash screen **/
+    /**
+     * A constant value representing the length of the splash screen
+     **/
     private static int PAUSE = 5000;
-
-    /** Creating a handler reference **/
+    /**
+     * Creating a handler reference
+     **/
     private Handler handler;
 
 
     /**
      * The initial point in the application.
+     *
      * @param savedInstanceState - The saved instance
      */
     @Override
@@ -36,8 +39,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         ActionBar actionBar = getSupportActionBar();
-        if(actionBar != null)
+        if (actionBar != null) {
             actionBar.hide();
+        } // end if
 
     } // end onCreate method
 
@@ -55,7 +59,9 @@ public class MainActivity extends AppCompatActivity {
 
     } // end onStart method
 
-    /** Creating a new runnable object **/
+    /**
+     * Creating a new runnable object
+     **/
     private final Runnable runner = new Runnable() {
         /**
          * This is a required method that is called when runnable is deployed.
@@ -74,5 +80,8 @@ public class MainActivity extends AppCompatActivity {
     private void goToNextScreen() {
         Intent mainMenu = new Intent(this, MainMenuActivity.class);
         this.startActivity(mainMenu);
+
+        // stop the user from going back to the splash screen
+        this.finish();
     } // end goToNextScreen method
 } // end MainActivity class

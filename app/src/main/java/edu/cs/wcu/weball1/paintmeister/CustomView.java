@@ -22,29 +22,24 @@ import java.util.HashMap;
 import java.util.List;
 
 /**
+ * CustomView.java
+ *
  * A custom view to capture onClickEvents and draw paths where the user clicks on the screen.
  *
  * @author Evert Ball
  * @author Chris Wolf
+ * @version 1.0.0 (May 4, 2020)
  */
 public class CustomView extends View {
-
     /**
      * An array list of Stroke objects to draw lines on the canvas
      **/
     private List<Stroke> strokes;
 
     /**
-     * A list of lines that make up the drawings on a canvas.
+     * The list of strokes that will allow for multi-touch painting
      */
-    private List<Path> lines;
-
     private SparseArray<Stroke> activeStrokes;
-
-    /**
-     * The path currently being drawn by the user
-     **/
-    private Path activePath;
 
     /**
      * The paint that is currently used to draw
@@ -70,11 +65,10 @@ public class CustomView extends View {
      * Called when the custom view is initialized.
      *
      * @param context The application context
-     * @param attrs
+     * @param attrs attributes of this CustomView
      */
     public CustomView(Context context, AttributeSet attrs) {
         super(context, attrs);
-
         width = DEFAULT_WIDTH;
 
         // Set up the brush
@@ -165,7 +159,7 @@ public class CustomView extends View {
      * @param y The y coordinate.
      */
     public void touchUp(float x, float y) {
-        activePath = null;
+        Path activePath = null;
 
         // add this textual data for saving and loading
         this.stringRepresentation.append(x + " " + y + "\n");
@@ -218,7 +212,6 @@ public class CustomView extends View {
      *
      * @param fileText the text from the file that has a saved painting
      */
-    //TODO: Update to use the Stroke class
     public void setDrawingFromString(String fileText) {
         // Save the text to be added onto later
         this.stringRepresentation = new StringBuilder(fileText);
@@ -279,6 +272,5 @@ public class CustomView extends View {
     public void setBrushWidth(int width) {
         this.width = width;
     } // end setBrushWidth
-
 } // end CustomView class
 

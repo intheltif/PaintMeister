@@ -6,6 +6,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
 
+/**
+ * AboutActivity.java
+ *
+ * The screen that will display details about the developers (along with our lovely smiles)
+ *
+ * @author Evert Ball
+ * @author Chris Wolf
+ * @version 1.0.0 (May 4, 2020)
+ */
 public class AboutActivity extends AppCompatActivity {
 
     @Override
@@ -15,7 +24,7 @@ public class AboutActivity extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         if(actionBar != null)
             actionBar.setDisplayHomeAsUpEnabled(true);
-    }
+    } // end onCreate
 
     /**
      * Allows us to select an item in our AppBar.

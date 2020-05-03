@@ -2,45 +2,37 @@
 
     <item
         android:id="@+id/painting_title"
-        android:title="New Painting"
+        android:title="@string/default_painting_title"
         android:orderInCategory="1"
         app:showAsAction="always"
         />
 
     <item
         android:id="@+id/save_button"
-        android:title="Save"
+        android:title="@string/save_text"
         android:icon="@drawable/ic_action_save"
         android:orderInCategory="2"
         app:showAsAction="ifRoom" />
 
     <item
         android:id="@+id/choose_color_button"
-        android:title="Choose Paint Color"
+        android:title="@string/paint_color_text"
         android:icon="@drawable/ic_action_pick_color"
         android:orderInCategory="3"
         app:showAsAction="ifRoom"/>
 
     <item
         android:id="@+id/brush_width_button"
-        android:title="Brush Width"
+        android:title="@string/brush_width_text"
         android:icon="@drawable/ic_action_brush_width"
         android:orderInCategory="3"
         app:showAsAction="ifRoom"/>
 
     <item
         android:id="@+id/load_button"
-        android:title="Load"
+        android:title="@string/load_text"
         android:icon="@drawable/ic_action_load"
         android:orderInCategory="4"
-        app:showAsAction="ifRoom"/>
-
-
-    <item
-        android:id="@+id/preferences"
-        android:title="Action Settings"
-        android:icon="@drawable/ic_action_settings"
-        android:orderInCategory="5"
         app:showAsAction="ifRoom"/>
 
 </menu>

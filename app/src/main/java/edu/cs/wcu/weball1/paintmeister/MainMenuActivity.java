@@ -14,20 +14,27 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * MainMenuActivity.java
+ *
  * The main menu of the application. Handles navigating to each portion of the app.
  *
  * @author Evert Ball
  * @author Chris Wolf
- *
- * @version 05 May 2020
+ * @version 1.0.0 (May 4, 2020)
  */
 public class MainMenuActivity extends AppCompatActivity {
 
+    /** The button to start a new painting */
     private Button startPaintBtn;
+    /** The button to load a painting from storage */
     private Button loadPaintBtn;
-    private Button prefsBtn;
+    /** The button to lead to the "About Developer" screen */
     private Button aboutBtn;
 
+    /**
+     * Behavior to be completed when the screen is loaded
+     * @param savedInstanceState the preferences from a previous use of the application
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,7 +47,6 @@ public class MainMenuActivity extends AppCompatActivity {
 
         this.startPaintBtn = findViewById(R.id.btn_paint);
         this.loadPaintBtn = findViewById(R.id.btn_load);
-        this.prefsBtn = findViewById(R.id.btn_prefs);
         this.aboutBtn = findViewById(R.id.btn_info);
     } // end onCreate method
 
@@ -49,29 +55,24 @@ public class MainMenuActivity extends AppCompatActivity {
 
         if(v == startPaintBtn) {
             nextActivity = new Intent(this, PaintActivity.class);
+            nextActivity.setFlags(Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT);
             startActivity(nextActivity);
         } else if(v == loadPaintBtn) {
             this.loadPaintButtonPressed();
-        } else if(v == prefsBtn) {
-            Toast.makeText(this, "Will be implemented soon...", Toast.LENGTH_SHORT).show();
         } else if(v == aboutBtn) {
             nextActivity = new Intent(this, AboutActivity.class);
+            nextActivity.setFlags(Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT);
             startActivity(nextActivity);
         } // end if statement
     } // end onClick method
 
+    /**
+     * Behavior to be performed when the load paint button is pressed
+     */
     private void loadPaintButtonPressed() {
         Intent loadScreen = new Intent(this, LoadScreen.class);
+        loadScreen.setFlags(Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT);
         this.startActivity(loadScreen);
-//        File[] files = this.getFilesDir().listFiles();
-//
-//        List<String> fileNames = new ArrayList<>();
-//
-//        for (File file : files) {
-//            fileNames.add(file.toString());
-//        }
-//
-//        Toast.makeText(this, fileNames.toString(), Toast.LENGTH_SHORT).show();
-    }
+    } // end loadPaintButtonPressed
 
 }
