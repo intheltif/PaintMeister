@@ -18,6 +18,8 @@
 
     <string name="save">SAVE</string>
     <string name="load">LOAD</string>
+    <string name="confirm">Confirm</string>
+    <string name="cancel">Cancel</string>
     <string name="date_created">May 4th, 2020</string>
     <string name="app_description">
         This app was created as a project for Dr. Andrew Scott\'s CS467: Mobile Application

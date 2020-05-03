@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    android:id="@+id/brush_width_root"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/tv_brush_width_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:gravity="center"
+        android:textSize="@dimen/title_txt_size"
+        android:text="Choose Brush Width"/>
+
+    <TextView
+        android:id="@+id/tv_brush_width_display"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_brush_width_title"
+        android:gravity="center"
+        android:textSize="@dimen/title_txt_size" />
+
+    <SeekBar
+        android:id="@+id/sb_brush_width"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_brush_width_display"
+        android:min="1"
+        android:max="50" />
+
+</RelativeLayout>

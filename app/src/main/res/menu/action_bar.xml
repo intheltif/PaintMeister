@@ -15,17 +15,32 @@
         app:showAsAction="ifRoom" />
 
     <item
+        android:id="@+id/choose_color_button"
+        android:title="Choose Paint Color"
+        android:icon="@drawable/ic_action_pick_color"
+        android:orderInCategory="3"
+        app:showAsAction="ifRoom"/>
+
+    <item
+        android:id="@+id/brush_width_button"
+        android:title="Brush Width"
+        android:icon="@drawable/ic_action_brush_width"
+        android:orderInCategory="3"
+        app:showAsAction="ifRoom"/>
+
+    <item
         android:id="@+id/load_button"
         android:title="Load"
         android:icon="@drawable/ic_action_load"
-        android:orderInCategory="3"
+        android:orderInCategory="4"
         app:showAsAction="ifRoom"/>
+
 
     <item
         android:id="@+id/preferences"
         android:title="Action Settings"
         android:icon="@drawable/ic_action_settings"
-        android:orderInCategory="4"
+        android:orderInCategory="5"
         app:showAsAction="ifRoom"/>
 
 </menu>

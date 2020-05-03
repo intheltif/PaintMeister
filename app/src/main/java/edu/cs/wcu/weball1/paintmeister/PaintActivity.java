@@ -5,6 +5,8 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.InputFilter;
+import android.text.InputType;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
@@ -12,6 +14,10 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.skydoves.colorpickerview.ColorEnvelope;
+import com.skydoves.colorpickerview.ColorPickerDialog;
+import com.skydoves.colorpickerview.listeners.ColorEnvelopeListener;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -112,11 +118,18 @@ public class PaintActivity extends AppCompatActivity {
             case R.id.painting_title:
                 this.onPaintingTitleClicked();
                 break;
+            case R.id.choose_color_button:
+                this.onChooseColorClicked();
+                break;
+            case R.id.brush_width_button:
+                this.onBrushWidthClicked();
+                break;
             case android.R.id.home:
                 // Exits w/out saving on back button pressed
                 // TODO: Maybe make this save when the button is pressed
                 finish();
-        }
+                break;
+        } // end switch
 
         return super.onOptionsItemSelected(item);
     } // end onOptionsItemSelected
@@ -183,6 +196,60 @@ public class PaintActivity extends AppCompatActivity {
         Intent loadScreen = new Intent(this, LoadScreen.class);
         this.startActivity(loadScreen);
     } // end onLoadButtonClicked
+
+    private void onChooseColorClicked() {
+        new ColorPickerDialog.Builder(this, AlertDialog.THEME_DEVICE_DEFAULT_DARK)
+      .setTitle("ColorPicker Dialog")
+      .setPreferenceName("MyColorPickerDialog")
+      .setPositiveButton(getString(R.string.confirm),
+          new ColorEnvelopeListener() {
+              @Override
+              public void onColorSelected(ColorEnvelope envelope, boolean fromUser) {
+                  touchArea.setPaintColor(envelope.getColor());
+              }
+          })
+       .setNegativeButton(getString(R.string.cancel),
+          new DialogInterface.OnClickListener() {
+              @Override
+              public void onClick(DialogInterface dialogInterface, int i) {
+                  dialogInterface.dismiss();
+              }
+           })
+      .attachAlphaSlideBar(true) // default is true. If false, do not show the AlphaSlideBar.
+      .attachBrightnessSlideBar(true)  // default is true. If false, do not show the BrightnessSlideBar.
+      .show();
+    }
+
+    private void onBrushWidthClicked() {
+        AlertDialog.Builder brushWidthChange = new AlertDialog.Builder(this);
+        brushWidthChange.setTitle("Change Brush Width");
+        brushWidthChange.setMessage("Enter a new brush width:");
+        final EditText newWidth = new EditText(this);
+        int maxLen = 3;
+        newWidth.setInputType(InputType.TYPE_CLASS_NUMBER);
+        newWidth.setFilters(new InputFilter[] {new InputFilter.LengthFilter(maxLen)});
+        brushWidthChange.setView(newWidth);
+        brushWidthChange.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                String newBrushWidth = newWidth.getText().toString();
+                if (!newBrushWidth.equals("") && newBrushWidth.matches("\\d+")) {
+                    touchArea.setBrushWidth(Integer.parseInt(newBrushWidth));
+                } // end if
+
+                dialog.dismiss();
+            } // end onClick
+        }); // end setPositiveButton
+        brushWidthChange.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            } // end onClick
+        }); // end setNegativeButton
+
+        AlertDialog prompt = brushWidthChange.create();
+        prompt.show();
+    }
 
     /**
      * Behavior to be completed when the preferences button is clicked
