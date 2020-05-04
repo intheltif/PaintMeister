@@ -4,8 +4,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.widget.Toast;
 
 
 /**
@@ -47,6 +50,15 @@ public class ColorPickerActivity extends AppCompatActivity implements ColorAdapt
         Intent result = new Intent();
         result.putExtra("color", text);
         setResult(COLOR_REQ, result);
+
+        // Save this to shared preferences
+        SharedPreferences brushStats = getSharedPreferences("brushStats",
+                Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = brushStats.edit();
+
+        editor.putInt("brushColor", Integer.parseInt(text));
+        editor.apply();
+
         finish();
     } // end colorClicked
 

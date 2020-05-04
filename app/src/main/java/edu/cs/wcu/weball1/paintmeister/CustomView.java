@@ -264,6 +264,7 @@ public class CustomView extends View {
      */
     public void setBrushWidth(int width) {
         this.width = width;
+        currentPaint.setStrokeWidth(width);
     } // end setBrushWidth
 } // end CustomView class
 
