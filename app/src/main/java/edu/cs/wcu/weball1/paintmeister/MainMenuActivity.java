@@ -73,6 +73,10 @@ public class MainMenuActivity extends AppCompatActivity {
 
     } // end onCreate method
 
+    /**
+     * Performs an action when a button is clicked by a user.
+     * @param v The view that was clicked.
+     */
     public void onClick(View v) {
         Intent nextActivity;
 

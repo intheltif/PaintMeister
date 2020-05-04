@@ -16,10 +16,6 @@ import android.widget.Toast;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.skydoves.colorpickerview.ColorEnvelope;
-import com.skydoves.colorpickerview.ColorPickerDialog;
-import com.skydoves.colorpickerview.listeners.ColorEnvelopeListener;
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -165,11 +161,11 @@ public class PaintActivity extends AppCompatActivity {
      */
     public void onPaintingTitleClicked() {
         AlertDialog.Builder inputTitleChange = new AlertDialog.Builder(this);
-        inputTitleChange.setTitle("Change painting title?");
-        inputTitleChange.setMessage("What is the new title of your painting?");
+        inputTitleChange.setTitle(R.string.change_title_title);
+        inputTitleChange.setMessage(R.string.new_title_message);
         final EditText newTitle = new EditText(this);
         inputTitleChange.setView(newTitle);
-        inputTitleChange.setPositiveButton("Rename", new DialogInterface.OnClickListener() {
+        inputTitleChange.setPositiveButton(R.string.rename, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 String newTitleText = newTitle.getText().toString();
@@ -181,7 +177,7 @@ public class PaintActivity extends AppCompatActivity {
                 dialog.dismiss();
             } // end onClick
         }); // end setPositiveButton
-        inputTitleChange.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+        inputTitleChange.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
@@ -228,39 +224,16 @@ public class PaintActivity extends AppCompatActivity {
      * Behavior to be performed the color chooser is clicked
      */
     private void onChooseColorClicked() {
-        // TODO: Start activity for result
         Intent colorPicker = new Intent(this, ColorPickerActivity.class);
         startActivityForResult(colorPicker, COLOR_REQ);
-        /*
-        new ColorPickerDialog.Builder(this, AlertDialog.THEME_DEVICE_DEFAULT_DARK)
-                .setTitle("ColorPicker Dialog")
-                .setPreferenceName("MyColorPickerDialog")
-                .setPositiveButton(getString(R.string.confirm),
-                        new ColorEnvelopeListener() {
-                            @Override
-                            public void onColorSelected(ColorEnvelope envelope, boolean fromUser) {
-                                touchArea.setPaintColor(envelope.getColor());
-
-                                SharedPreferences brushStats = getSharedPreferences("brushStats", Context.MODE_PRIVATE);
-                                SharedPreferences.Editor editor = brushStats.edit();
-
-                                editor.putInt("brushColor", envelope.getColor());
-                                editor.commit();
-                            }
-                        })
-                .setNegativeButton(getString(R.string.cancel),
-                        new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                                dialogInterface.dismiss();
-                            }
-                        })
-                .attachAlphaSlideBar(true) // default is true. If false, do not show the AlphaSlideBar.
-                .attachBrightnessSlideBar(true)  // default is true. If false, do not show the BrightnessSlideBar.
-                .show();
-         */
     } // end onBrushColorClicked
 
+    /**
+     * Called when an activity returns a result to this activity.
+     * @param requestCode The requestCode that returned the result.
+     * @param resultCode The result code to determine if the desired response happened.
+     * @param data The data that is held in the intent being returned from the activity.
+     */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data)
     {
@@ -282,8 +255,8 @@ public class PaintActivity extends AppCompatActivity {
 
         // Create new dialog and set it up
         AlertDialog.Builder brushWidthChange = new AlertDialog.Builder(this);
-        brushWidthChange.setTitle("Change Brush Width");
-        brushWidthChange.setMessage("Enter a new brush width:");
+        brushWidthChange.setTitle(R.string.choose_width);
+        brushWidthChange.setMessage(R.string.width_msg);
         brushWidthChange.setView(newWidth);
 
         // Make edit text only accept numbers up to 3 digits in length
@@ -291,7 +264,7 @@ public class PaintActivity extends AppCompatActivity {
         newWidth.setFilters(new InputFilter[]{new InputFilter.LengthFilter(maxLen)});
 
         // Actions for confirmation and cancel buttons
-        brushWidthChange.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
+        brushWidthChange.setPositiveButton(R.string.confirm, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 String newBrushWidth = newWidth.getText().toString();
@@ -299,7 +272,8 @@ public class PaintActivity extends AppCompatActivity {
                     touchArea.setBrushWidth(Integer.parseInt(newBrushWidth));
 
                     // Save the new brush width to shared preferences
-                    SharedPreferences brushStats = getSharedPreferences("brushStats", Context.MODE_PRIVATE);
+                    SharedPreferences brushStats = getSharedPreferences("brushStats",
+                            Context.MODE_PRIVATE);
                     SharedPreferences.Editor editor = brushStats.edit();
 
                     editor.putInt("brushWidth", Integer.parseInt(newBrushWidth));
@@ -309,7 +283,7 @@ public class PaintActivity extends AppCompatActivity {
                 dialog.dismiss();
             } // end onClick
         }); // end setPositiveButton
-        brushWidthChange.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+        brushWidthChange.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();

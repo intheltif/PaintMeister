@@ -66,7 +66,8 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder>
      */
     @NonNull
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        LinearLayout layout = (LinearLayout) LayoutInflater.from(parent.getContext()).inflate(R.layout.saved_painting, parent, false);
+        LinearLayout layout = (LinearLayout) LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.saved_painting, parent, false);
         TextView fileName = layout.findViewById(R.id.file_name);
 
         layout.setOnClickListener(this);

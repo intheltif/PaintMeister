@@ -20,6 +20,7 @@
     <string name="load">LOAD</string>
     <string name="confirm">Confirm</string>
     <string name="cancel">Cancel</string>
+    <string name="rename">Rename</string>
     <string name="date_created">May 4th, 2020</string>
     <string name="app_description">
         This app was created as a project for Dr. Andrew Scott\'s CS467: Mobile Application
@@ -30,9 +31,15 @@
     <!-- Image Descriptions -->
     <string name="chris_photo_desc">Photo of Chris Wolf, one of the developers of this app</string>
     <string name="evert_photo_desc">Photo of Evert Ball, one of the developers of this app</string>
+
+    <!-- Misc strings -->
     <string name="save_text">Save</string>
+    <string name="load_text">Load</string>
     <string name="paint_color_text">Choose Paint Color</string>
     <string name="brush_width_text">Brush Width</string>
-    <string name="load_text">Load</string>
+    <string name="choose_width">Change Brush Width</string>
+    <string name="width_msg">Enter a new brush width:</string>
     <string name="default_painting_title">New Painting</string>
+    <string name="change_title_title">Change painting title?</string>
+    <string name="new_title_message">What is the new title of your painting?</string>
 </resources>

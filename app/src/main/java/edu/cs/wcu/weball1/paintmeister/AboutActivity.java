@@ -17,6 +17,10 @@ import android.view.MenuItem;
  */
 public class AboutActivity extends AppCompatActivity {
 
+    /**
+     * Called when this activity is created.
+     * @param savedInstanceState The saved instance state.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

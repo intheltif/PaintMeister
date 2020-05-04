@@ -1,6 +1,5 @@
 package edu.cs.wcu.weball1.paintmeister;
 
-import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +9,15 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+/**
+ * ColorAdapter.java
+ *
+ * The adapter to assist in generating the RecyclerView holding colors to choose from.
+ *
+ * @author Evert Ball
+ * @author Chris Wolf
+ * @version 1.0.0 (May 4, 2020)
+ */
 public class ColorAdapter extends RecyclerView.Adapter<ColorAdapter.ColorViewHolder>
         implements RecyclerView.OnClickListener{
 
@@ -22,11 +30,11 @@ public class ColorAdapter extends RecyclerView.Adapter<ColorAdapter.ColorViewHol
     /**
      * Generate a new adapter
      * @param data the list of colors.
-     * @param iwc the listener for click events on a color.
+     * @param cwc the listener for click events on a color.
      */
-    ColorAdapter(int[] data, ColorAdapter.ColorWasClicked iwc) {
+    ColorAdapter(int[] data, ColorAdapter.ColorWasClicked cwc) {
         this.data = data;
-        this.cwcImp = iwc;
+        this.cwcImp = cwc;
     } // end constructor
 
     /**
@@ -57,7 +65,8 @@ public class ColorAdapter extends RecyclerView.Adapter<ColorAdapter.ColorViewHol
      */
     @NonNull
     public ColorViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        LinearLayout layout = (LinearLayout) LayoutInflater.from(parent.getContext()).inflate(R.layout.color_selection, parent, false);
+        LinearLayout layout = (LinearLayout) LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.color_selection, parent, false);
         TextView hex = layout.findViewById(R.id.color_hex);
         TextView swatch = layout.findViewById(R.id.color_swatch);
 
@@ -67,8 +76,8 @@ public class ColorAdapter extends RecyclerView.Adapter<ColorAdapter.ColorViewHol
     } // end onCreateViewHolder
 
     /**
-     * Behavior to be performed when a file name is clicked
-     * @param v the view representing the file that was clicked
+     * Behavior to be performed when a color is clicked
+     * @param v the view representing the color that was clicked
      */
     @Override
     public void onClick(View v) {
@@ -108,4 +117,4 @@ public class ColorAdapter extends RecyclerView.Adapter<ColorAdapter.ColorViewHol
         } // end constructor
     } // end MyViewHolder
 
-}
+} // end ColorAdapter class

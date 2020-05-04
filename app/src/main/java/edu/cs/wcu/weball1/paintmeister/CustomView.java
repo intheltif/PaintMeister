@@ -73,7 +73,8 @@ public class CustomView extends View {
         width = DEFAULT_WIDTH;
 
         // Set up the brush
-        SharedPreferences brushStats = context.getSharedPreferences("brushStats", Context.MODE_PRIVATE);
+        SharedPreferences brushStats = context.getSharedPreferences("brushStats",
+                Context.MODE_PRIVATE);
         currentPaint = new Paint();
         currentPaint.setStyle(Paint.Style.STROKE);
         currentPaint.setStrokeWidth(brushStats.getInt("brushWidth", DEFAULT_WIDTH));
@@ -107,7 +108,7 @@ public class CustomView extends View {
     } // end onDraw
 
     /**
-     * When the users finger is placed on the screem
+     * When the users finger is placed on the screen
      *
      * @param x  coordinate
      * @param y  The y coordinate.

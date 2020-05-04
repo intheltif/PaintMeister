@@ -8,6 +8,15 @@ import android.content.Intent;
 import android.os.Bundle;
 
 
+/**
+ * ColorPickerActivity.java
+ *
+ * The screen that will allow the user to choose a selection of colors to paint with.
+ *
+ * @author Evert Ball
+ * @author Chris Wolf
+ * @version 1.0.0 (May 4, 2020)
+ */
 public class ColorPickerActivity extends AppCompatActivity implements ColorAdapter.ColorWasClicked {
 
     private static final int COLOR_REQ = 2;
