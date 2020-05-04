@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.DarkActionBar">
-        <activity android:name=".AboutActivity"></activity>
+        <activity android:name=".ColorPickerActivity"></activity>
+        <activity android:name=".AboutActivity" />
         <activity android:name=".MyAdapter" />
         <activity android:name=".LoadScreen" />
         <activity android:name=".PaintActivity" />

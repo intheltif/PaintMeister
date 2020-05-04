@@ -21,7 +21,8 @@ import java.util.List;
  * @version 1.0.0 (May 4, 2020)
  */
 
-public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder>  implements RecyclerView.OnClickListener {
+public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder>
+        implements RecyclerView.OnClickListener {
     /** The list of file names */
     private List<String> data;
     /** The activity that will handle loading the file that was clicked */

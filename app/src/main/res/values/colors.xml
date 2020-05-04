@@ -32,4 +32,35 @@
     <color name="orange">#dd8822</color>
     <color name="brown">#774422</color>
     <color name="purple">#6644CC</color>
+
+    <array name="rainbow" >
+        <item>@color/black</item>
+        <item>@color/blue</item>
+        <item>@color/lt_blue</item>
+        <item>@color/lt_blue</item>
+        <item>@color/dk_blue</item>
+        <item>@color/red</item>
+        <item>@color/lt_red</item>
+        <item>@color/dk_red</item>
+        <item>@color/magenta</item>
+        <item>@color/lt_pink</item>
+        <item>@color/dk_pink</item>
+        <item>@color/green</item>
+        <item>@color/lt_green</item>
+        <item>@color/dk_green</item>
+        <item>@color/cyan</item>
+        <item>@color/yellow</item>
+        <item>@color/white</item>
+        <item>@color/grey</item>
+        <item>@color/lt_grey</item>
+        <item>@color/dk_grey</item>
+        <item>@color/orange</item>
+        <item>@color/brown</item>
+        <item>@color/purple</item>
+        <item>@color/wcu_purple</item>
+        <item>@color/wcu_gold</item>
+        <item>@color/colorPrimary</item>
+        <item>@color/colorPrimaryDark</item>
+        <item>@color/colorAccent</item>
+    </array>
 </resources>

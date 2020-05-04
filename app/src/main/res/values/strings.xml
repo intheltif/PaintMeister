@@ -3,7 +3,7 @@
     <string name="app_name">Paint Meister</string>
     <string name="main_menu_title">Let\'s Get Painting!</string>
     <string name="info_title">App Info</string>
-    
+
     <!-- Subtitles -->
     <string name="info_devs_subtitle">Developers:</string>
     <string name="dev_name1">Chris Wolf</string>

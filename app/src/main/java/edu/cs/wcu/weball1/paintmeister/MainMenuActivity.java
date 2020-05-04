@@ -4,9 +4,14 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.LinearGradient;
+import android.graphics.Shader;
 import android.os.Bundle;
+import android.text.TextPaint;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.File;
@@ -30,6 +35,8 @@ public class MainMenuActivity extends AppCompatActivity {
     private Button loadPaintBtn;
     /** The button to lead to the "About Developer" screen */
     private Button aboutBtn;
+    /** The main menu title at the top of the page */
+    private TextView menuTitle;
 
     /**
      * Behavior to be completed when the screen is loaded
@@ -40,14 +47,30 @@ public class MainMenuActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu);
 
+        this.startPaintBtn = findViewById(R.id.btn_paint);
+        this.loadPaintBtn = findViewById(R.id.btn_load);
+        this.aboutBtn = findViewById(R.id.btn_info);
+
         // Hiding the ActionBar
         ActionBar actionBar = getSupportActionBar();
         if(actionBar != null)
             actionBar.hide();
 
-        this.startPaintBtn = findViewById(R.id.btn_paint);
-        this.loadPaintBtn = findViewById(R.id.btn_load);
-        this.aboutBtn = findViewById(R.id.btn_info);
+        // Giving the title a rainbow style gradient
+        menuTitle = findViewById(R.id.tv_main_menu_title);
+        TextPaint paint = menuTitle.getPaint();
+        float width = paint.measureText(menuTitle.getText().toString());
+        Shader textShader = new LinearGradient(0, 0, width, menuTitle.getTextSize(),
+                new int[]{
+                        Color.parseColor("#F97C3C"),
+                        Color.parseColor("#FDB54E"),
+                        Color.parseColor("#64B678"),
+                        Color.parseColor("#478AEA"),
+                        Color.parseColor("#8446CC"),
+                }, null, Shader.TileMode.CLAMP);
+        menuTitle.getPaint().setShader(textShader);
+        menuTitle.setTextColor(Color.parseColor("#F97C3C"));
+
     } // end onCreate method
 
     public void onClick(View v) {

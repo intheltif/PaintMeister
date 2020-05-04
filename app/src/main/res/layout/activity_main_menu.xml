@@ -44,7 +44,6 @@
         android:text="@string/preferences_btn"
         android:textSize="@dimen/default_btn_text_size"/>
 
-<!-- TODO: Make into an info button to match storyboard -->
     <Button
         android:id="@+id/btn_info"
         android:onClick="onClick"

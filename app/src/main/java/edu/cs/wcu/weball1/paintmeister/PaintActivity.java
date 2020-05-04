@@ -38,6 +38,8 @@ import java.io.IOException;
 
 public class PaintActivity extends AppCompatActivity {
 
+    private static final int COLOR_REQ = 2;
+
     /**
      * Reference to the area on the screen that is being touched.
      */
@@ -226,6 +228,10 @@ public class PaintActivity extends AppCompatActivity {
      * Behavior to be performed the color chooser is clicked
      */
     private void onChooseColorClicked() {
+        // TODO: Start activity for result
+        Intent colorPicker = new Intent(this, ColorPickerActivity.class);
+        startActivityForResult(colorPicker, COLOR_REQ);
+        /*
         new ColorPickerDialog.Builder(this, AlertDialog.THEME_DEVICE_DEFAULT_DARK)
                 .setTitle("ColorPicker Dialog")
                 .setPreferenceName("MyColorPickerDialog")
@@ -252,7 +258,20 @@ public class PaintActivity extends AppCompatActivity {
                 .attachAlphaSlideBar(true) // default is true. If false, do not show the AlphaSlideBar.
                 .attachBrightnessSlideBar(true)  // default is true. If false, do not show the BrightnessSlideBar.
                 .show();
+         */
     } // end onBrushColorClicked
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data)
+    {
+        super.onActivityResult(requestCode, resultCode, data);
+        // check if the request code is same as what is passed
+        if(requestCode == 2) {
+            String color = data.getStringExtra("color");
+            if(color != null)
+                touchArea.setPaintColor(Integer.parseInt(color));
+        }
+    }
 
     /**
      * Behavior to be performed when the brush width action button is clicked
