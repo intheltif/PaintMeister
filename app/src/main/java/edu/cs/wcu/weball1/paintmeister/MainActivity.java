@@ -21,12 +21,7 @@ public class MainActivity extends AppCompatActivity {
     /**
      * A constant value representing the length of the splash screen
      **/
-    private static int PAUSE = 5000;
-    /**
-     * Creating a handler reference
-     **/
-    private Handler handler;
-
+    private static final int PAUSE = 5000;
 
     /**
      * The initial point in the application.
@@ -53,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
         super.onStart();
 
         //Creating a new handler
-        handler = new Handler();
+        Handler handler = new Handler();
         // Setting the handler to the delayed time amount
         handler.postDelayed(runner, PAUSE);
 

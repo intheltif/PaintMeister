@@ -102,7 +102,7 @@ public class PaintActivity extends AppCompatActivity {
     /**
      * Gets the textual drawing information contained within a file.
      * @param fileName The name of the file that contains the painting.
-     * @return
+     * @return A string that is the text inside the file.
      */
     private String getFileText(String fileName) {
         StringBuilder text = new StringBuilder();
@@ -197,9 +197,6 @@ public class PaintActivity extends AppCompatActivity {
         MenuItem item = menu.findItem(R.id.painting_title);
         String fileName = item.getTitle().toString();
 
-        // See if I can load files from directory
-        File[] files = this.getFilesDir().listFiles();
-
         try {
             stream = openFileOutput(fileName, Context.MODE_PRIVATE);
             stream.write(this.touchArea.getStringRepresentation().getBytes());
@@ -277,7 +274,7 @@ public class PaintActivity extends AppCompatActivity {
                     SharedPreferences.Editor editor = brushStats.edit();
 
                     editor.putInt("brushWidth", Integer.parseInt(newBrushWidth));
-                    editor.commit();
+                    editor.apply();
                 } // end if
 
                 dialog.dismiss();

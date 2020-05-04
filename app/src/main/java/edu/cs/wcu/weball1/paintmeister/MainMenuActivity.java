@@ -12,11 +12,6 @@ import android.text.TextPaint;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * MainMenuActivity.java
@@ -35,8 +30,6 @@ public class MainMenuActivity extends AppCompatActivity {
     private Button loadPaintBtn;
     /** The button to lead to the "About Developer" screen */
     private Button aboutBtn;
-    /** The main menu title at the top of the page */
-    private TextView menuTitle;
 
     /**
      * Behavior to be completed when the screen is loaded
@@ -57,7 +50,7 @@ public class MainMenuActivity extends AppCompatActivity {
             actionBar.hide();
 
         // Giving the title a rainbow style gradient
-        menuTitle = findViewById(R.id.tv_main_menu_title);
+        TextView menuTitle = findViewById(R.id.tv_main_menu_title);
         TextPaint paint = menuTitle.getPaint();
         float width = paint.measureText(menuTitle.getText().toString());
         Shader textShader = new LinearGradient(0, 0, width, menuTitle.getTextSize(),

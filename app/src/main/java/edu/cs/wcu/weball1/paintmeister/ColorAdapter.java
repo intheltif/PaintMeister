@@ -71,8 +71,7 @@ public class ColorAdapter extends RecyclerView.Adapter<ColorAdapter.ColorViewHol
         TextView swatch = layout.findViewById(R.id.color_swatch);
 
         layout.setOnClickListener(this);
-        ColorViewHolder cvh = new ColorViewHolder(layout, hex, swatch);
-        return cvh;
+        return new ColorViewHolder(layout, hex, swatch);
     } // end onCreateViewHolder
 
     /**

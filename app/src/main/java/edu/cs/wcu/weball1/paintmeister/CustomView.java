@@ -2,24 +2,17 @@ package edu.cs.wcu.weball1.paintmeister;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
-import android.graphics.Point;
 import android.graphics.PointF;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.util.SparseArray;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.Toast;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -161,8 +154,6 @@ public class CustomView extends View {
      * @param y The y coordinate.
      */
     public void touchUp(float x, float y) {
-        Path activePath = null;
-
         // add this textual data for saving and loading
         this.stringRepresentation.append(x + " " + y + "\n");
     } // end touchUp
@@ -245,8 +236,8 @@ public class CustomView extends View {
                 float xCoor = Float.parseFloat(fileCommands[i]);
                 i++;
                 float yCoor = Float.parseFloat(fileCommands[i]);
-
-                activeStroke.addPoint(new PointF(xCoor, yCoor));
+                if(activeStroke != null)
+                    activeStroke.addPoint(new PointF(xCoor, yCoor));
             } // end else
 
             // increment to the next bit of data in the file
