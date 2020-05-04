@@ -72,6 +72,11 @@ public class PaintActivity extends AppCompatActivity {
         } // end if
     } //==========================================================
 
+    /**
+     * Initializes the contents of the Activity's options menu.
+     * @param menu The options menu.
+     * @return True if the menu is to be displayed, false otherwise.
+     */
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.action_bar, menu);
         this.menu = menu;
@@ -86,11 +91,21 @@ public class PaintActivity extends AppCompatActivity {
         return true;
     } // end onCreateOptionsMenu
 
+    /**
+     * Recreates a saved drawing on the screen.
+     * @param loadedFile Text file that contains the information for drawing a saved painting on
+     *                   the screen.
+     */
     private void setPictureFromSavedFile(String loadedFile) {
         String fileText = getFileText(loadedFile);
         this.touchArea.setDrawingFromString(fileText);
     } // end setPictureFromSavedFile
 
+    /**
+     * Gets the textual drawing information contained within a file.
+     * @param fileName The name of the file that contains the painting.
+     * @return
+     */
     private String getFileText(String fileName) {
         StringBuilder text = new StringBuilder();
         try {
@@ -104,7 +119,8 @@ public class PaintActivity extends AppCompatActivity {
             } // end while
             br.close();
         } catch (IOException e) {
-            //You'll need to add proper error handling here
+            Toast.makeText(this, "File could not be read.", Toast.LENGTH_SHORT).show();
+            e.printStackTrace();
         } // end catch
 
         return text.toString();
@@ -242,14 +258,20 @@ public class PaintActivity extends AppCompatActivity {
      * Behavior to be performed when the brush width action button is clicked
      */
     private void onBrushWidthClicked() {
+        final EditText newWidth = new EditText(this);
+        int maxLen = 3;
+
+        // Create new dialog and set it up
         AlertDialog.Builder brushWidthChange = new AlertDialog.Builder(this);
         brushWidthChange.setTitle("Change Brush Width");
         brushWidthChange.setMessage("Enter a new brush width:");
-        final EditText newWidth = new EditText(this);
-        int maxLen = 3;
+        brushWidthChange.setView(newWidth);
+
+        // Make edit text only accept numbers up to 3 digits in length
         newWidth.setInputType(InputType.TYPE_CLASS_NUMBER);
         newWidth.setFilters(new InputFilter[]{new InputFilter.LengthFilter(maxLen)});
-        brushWidthChange.setView(newWidth);
+
+        // Actions for confirmation and cancel buttons
         brushWidthChange.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -275,7 +297,9 @@ public class PaintActivity extends AppCompatActivity {
             } // end onClick
         }); // end setNegativeButton
 
+        // Show the dialog
         AlertDialog prompt = brushWidthChange.create();
         prompt.show();
     } // end onBrushWidthClicked
+
 } // end PaintActivity
