@@ -21,7 +21,6 @@ import androidx.recyclerview.widget.RecyclerView;
 public class ColorAdapter extends RecyclerView.Adapter<ColorAdapter.ColorViewHolder>
         implements RecyclerView.OnClickListener{
 
-
     /** The list of color names */
     private int[] data;
     /** Handles the click event on a color */

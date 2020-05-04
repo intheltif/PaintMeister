@@ -21,9 +21,13 @@ import android.widget.Toast;
  * @version 1.0.0 (May 4, 2020)
  */
 public class ColorPickerActivity extends AppCompatActivity implements ColorAdapter.ColorWasClicked {
-
+    /** minimum number of colors allowed */
     private static final int COLOR_REQ = 2;
 
+    /**
+     * Behavior to be completed when the activity is created
+     * @param savedInstanceState saved preferences from an earlier iteration of this application
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,5 +65,4 @@ public class ColorPickerActivity extends AppCompatActivity implements ColorAdapt
 
         finish();
     } // end colorClicked
-
 } // end ColorPicker class
