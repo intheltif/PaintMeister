@@ -1,6 +1,7 @@
 package edu.cs.wcu.weball1.paintmeister;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -72,10 +73,11 @@ public class CustomView extends View {
         width = DEFAULT_WIDTH;
 
         // Set up the brush
+        SharedPreferences brushStats = context.getSharedPreferences("brushStats", Context.MODE_PRIVATE);
         currentPaint = new Paint();
         currentPaint.setStyle(Paint.Style.STROKE);
-        currentPaint.setStrokeWidth(width);
-        currentPaint.setColor(Color.GREEN);
+        currentPaint.setStrokeWidth(brushStats.getInt("brushWidth", DEFAULT_WIDTH));
+        currentPaint.setColor(brushStats.getInt("brushColor", Color.GREEN));
 
         // Set up the list of strokes
         strokes = new ArrayList<>();
@@ -115,7 +117,7 @@ public class CustomView extends View {
         // Set the new brush settings
         Paint paint = new Paint();
         paint.setStyle(Paint.Style.STROKE);
-        paint.setStrokeWidth(width);
+        paint.setStrokeWidth(currentPaint.getStrokeWidth());
         paint.setColor(currentPaint.getColor());
 
         // Set up the new stroke

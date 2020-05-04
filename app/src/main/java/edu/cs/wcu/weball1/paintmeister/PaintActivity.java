@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.InputFilter;
 import android.text.InputType;
@@ -217,6 +218,12 @@ public class PaintActivity extends AppCompatActivity {
                             @Override
                             public void onColorSelected(ColorEnvelope envelope, boolean fromUser) {
                                 touchArea.setPaintColor(envelope.getColor());
+
+                                SharedPreferences brushStats = getSharedPreferences("brushStats", Context.MODE_PRIVATE);
+                                SharedPreferences.Editor editor = brushStats.edit();
+
+                                editor.putInt("brushColor", envelope.getColor());
+                                editor.commit();
                             }
                         })
                 .setNegativeButton(getString(R.string.cancel),
@@ -249,6 +256,13 @@ public class PaintActivity extends AppCompatActivity {
                 String newBrushWidth = newWidth.getText().toString();
                 if (!newBrushWidth.equals("") && newBrushWidth.matches("\\d+")) {
                     touchArea.setBrushWidth(Integer.parseInt(newBrushWidth));
+
+                    // Save the new brush width to shared preferences
+                    SharedPreferences brushStats = getSharedPreferences("brushStats", Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = brushStats.edit();
+
+                    editor.putInt("brushWidth", Integer.parseInt(newBrushWidth));
+                    editor.commit();
                 } // end if
 
                 dialog.dismiss();
